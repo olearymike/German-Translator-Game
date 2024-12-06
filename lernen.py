@@ -1,30 +1,40 @@
-# Take a CSV file with multiple categories: German Word, English Equivalent, and PoS
-
-# A game that gives you an English word and asks for the German equivalent, kinda like Quizlet
-# Also like Quizlet, it keeps track of which words you aren't as familiar with
-
-# Uses Panda and Plotly to show your learning statistics (What PoS you need most help with)
-
-# There will be another mode where you are given an English sentence and you must translate it
-# The sentences will be randomly generated. It will start off using simple phrases like "Die blau Katze läuft"
 import csv
 from random import randint
 
-with open('lernen/dictionary.csv', 'r') as file:
+with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     dictionary = list(csv.reader(file))
+    quit = False
+    print('It\'s time to test your German! Enter Q to quit.\n')
     
     while True:
+        attempt_num = 0
         index = randint(1,len(dictionary)-1)
-        word = dictionary[index][1]
+        word = dictionary[index][3]
+        
         
         print('Was ist das: ' +  word)
+        guess = input()
+
+        if dictionary[index][4] == 'noun':
+            target = dictionary[index][0] + ' ' + dictionary[index][1]
+        else:
+            target = dictionary[index][1]
+
+        if guess == 'Q':
+            break
 
         while True:
-
-            attempt = input()
-
-            if attempt == dictionary[index][3]:
-                print('Genau')
+            
+            if guess == target:
+                print('\nGenau!\n')
                 break
             else:
-                print('Nochmal, was ist das: ' + word)
+                attempt_num += 1
+                if attempt_num != 2:
+                    print('\nNochmal, was ist das: ' + word)
+                    guess = input()
+                else:
+                    print(f'\nNein, das ist {target}\n')
+                    break
+
+                
