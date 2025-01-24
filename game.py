@@ -1,5 +1,5 @@
 import csv
-from random import randint
+import random
 
 # This reads the csv file where all the words are stored and begins the game
 with open('dictionary.csv', 'r', encoding='UTF-8') as file:
@@ -11,7 +11,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     while True:
         attempt_num = 0
         # "Randomly" generates a number between 0 and the number of lines in the csv file
-        index = randint(1,len(dictionary))
+        index = random.randint(1,len(dictionary))
         # Taking the index variable, it grabs an English word from the dictionary.csv
         word = dictionary[index][3]
         
@@ -34,12 +34,14 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
             
             # If the user correctly guesses the word, they are congratulated and the loop continues
             if guess == target:
-                print('\nGenau!\n')
+                responses = ['Genau!', 'Richtig!', 'Sehr Gut!', 'Gute Arbiet!']
+                print(f'\n{random.choice(responses)}\n')
                 break
             else:
                 # If their guess was incorrect, they get a strike and are asked the question again
                 attempt_num += 1
                 if attempt_num != 2:
+                    
                     print('\nNochmal, was ist das: ' + word)
                     guess = input()
                 else:
