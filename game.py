@@ -4,6 +4,19 @@ import random
 # This reads the csv file where all the words are stored and begins the game
 with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     dictionary = list(csv.reader(file))
+    # The program asks the user which part of speech they would like to study. The code repeats until a specified PoS is selected, or if they select all.
+    while True:
+        desired_set = input('What part of speech would you like to work with? [\'noun\', \'verb\', \'adjective\', \'adverb\', or \'all\']: ')
+        if desired_set == 'all':
+            break
+        elif desired_set == 'noun' or desired_set == 'verb' or desired_set == 'adjective' or desired_set == 'adverb':
+            dictionary = [d for d in dictionary if desired_set in d]
+            break
+        else:
+            continue
+
+
+
     quit = False
     print('It\'s time to test your German! Enter Q to quit.\n')
     
@@ -11,7 +24,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     while True:
         attempt_num = 0
         # "Randomly" generates a number between 0 and the number of lines in the csv file
-        index = random.randint(1,len(dictionary))
+        index = random.randint(1,len(dictionary)-1)
         # Taking the index variable, it grabs an English word from the dictionary.csv
         word = dictionary[index][3]
         
