@@ -24,7 +24,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     while True:
         attempt_num = 0
         # "Randomly" generates a number between 0 and the number of lines in the csv file
-        index = random.randint(1,len(dictionary)-1)
+        index = random.randint(1,len(dictionary) - 1)
         # Taking the index variable, it grabs an English word from the dictionary.csv
         word = dictionary[index][3]
         
