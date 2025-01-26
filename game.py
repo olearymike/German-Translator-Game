@@ -4,18 +4,32 @@ import random
 # This reads the csv file where all the words are stored and begins the game
 with open('dictionary.csv', 'r', encoding='UTF-8') as file:
     dictionary = list(csv.reader(file))
+    desired_set = ''
+    desired_category = ''
     # The program asks the user which part of speech they would like to study. The code repeats until a specified PoS is selected, or if they select all.
     while True:
-        desired_set = input('What part of speech would you like to work with? [\'noun\', \'verb\', \'adjective\', \'adverb\', or \'all\']: ')
+        desired_set = input('What part of speech would you like to work with? [\'nouns\', \'verbs\', \'adjectives\', \'adverbs\', or \'all\']: ')
         if desired_set == 'all':
             break
-        elif desired_set == 'noun' or desired_set == 'verb' or desired_set == 'adjective' or desired_set == 'adverb':
+        elif desired_set == 'nouns' or desired_set == 'verbs' or desired_set == 'adjectives' or desired_set == 'adverbs':
             dictionary = [d for d in dictionary if desired_set in d]
             break
         else:
             continue
+    
+    # If applicable, the program asks the user if they'd like to study a specific category within their desired part of speech
 
-
+    if desired_set == 'nouns':
+        while True:
+            desired_category = input('What category would you like to study? [\'clothes\', \'animals\', \'all\']: ')
+            if desired_category == 'all':
+                break
+            elif desired_category == 'clothes' or desired_category == 'animals':
+                dictionary = [d for d in dictionary if desired_category in d]
+                break
+            else:
+                continue
+            
 
     quit = False
     print('It\'s time to test your German! Enter Q to quit.\n')
@@ -34,7 +48,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
 
         # If the word is a noun, it adds the article behind the word
         # For example, if the word is "cat", the user would need to respond with "die Katze" instead of just "Katze"
-        if dictionary[index][4] == 'noun':
+        if dictionary[index][4] == 'nouns':
             target = dictionary[index][0] + ' ' + dictionary[index][1]
         else:
             target = dictionary[index][1]
