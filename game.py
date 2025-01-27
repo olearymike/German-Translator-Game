@@ -24,7 +24,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
             desired_category = input('What category would you like to study? [\'clothes\', \'animals\', \'house\', \'all\']: ')
             if desired_category == 'all':
                 break
-            elif desired_category == 'clothes' or desired_category == 'animals':
+            elif desired_category == 'clothes' or desired_category == 'animals' or desired_category == 'house':
                 dictionary = [d for d in dictionary if desired_category in d]
                 break
             else:
