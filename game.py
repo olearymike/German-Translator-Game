@@ -33,10 +33,12 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
 
     quit = False
     print('It\'s time to test your German! Enter Q to quit.\n')
+    combo = 0
     
     # The program runs a loop until the letter 'Q' is inputted, causing the game to end
     while True:
         attempt_num = 0
+        
         # "Randomly" generates a number between 0 and the number of lines in the csv file
         index = random.randint(1,len(dictionary) - 1)
         # Taking the index variable, it grabs an English word from the dictionary.csv
@@ -59,13 +61,18 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
 
         while True:
             
-            # If the user correctly guesses the word, they are congratulated and the loop continues
+            # If the user correctly guesses the word, they are congratulated, their combo is increased by 1, and the loop continues
             if guess == target:
                 responses = ['Genau!', 'Richtig!', 'Sehr Gut!', 'Gute Arbiet!']
-                print(f'\n{random.choice(responses)}\n')
+                combo += 1
+                if combo % 5 == 0:
+                    print(f'\n{random.choice(responses)}\nCombo: {combo}\n')
+                else:
+                    print(f'\n{random.choice(responses)}\n')
                 break
             else:
-                # If their guess was incorrect, they get a strike and are asked the question again
+                combo = 0
+                # If their guess was incorrect, they get a strike and are asked the question again. The combo count also gets reset to 0
                 attempt_num += 1
                 if attempt_num != 2:
                     
