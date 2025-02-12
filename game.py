@@ -63,7 +63,7 @@ with open('dictionary.csv', 'r', encoding='UTF-8') as file:
             
             # If the user correctly guesses the word, they are congratulated, their combo is increased by 1, and the loop continues
             if guess == target:
-                responses = ['Genau!', 'Richtig!', 'Sehr Gut!', 'Gute Arbiet!']
+                responses = ['Genau!', 'Richtig!', 'Sehr Gut!', 'Gute Arbeit!']
                 combo += 1
                 if combo % 5 == 0:
                     print(f'\n{random.choice(responses)}\nCombo: {combo}\n')
